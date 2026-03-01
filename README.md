@@ -1,12 +1,6 @@
 # Workstation setup
 
-> [!NOTE]
-> **TODO**
-> - state that credentials, dotfiles, ... should be managed separately (e.g., in `workstation-setup-gw`)
-> - TBD: setup: - workspace: gtd-setup with action, inbox, projects (containing symlinks to repos and nextcloud directories)
-> -> TODO: document backups
-> - philosophy: codifying infrastructure as organizational memory (of technology stack/setup)
-
+## Overview
 
 ```mermaid
 flowchart LR
