@@ -57,8 +57,17 @@
         "update.showReleaseNotes": false,
         "telemetry.telemetryLevel": "off",
         "workbench.editor.enablePreview": false,
-        "files.trimTrailingWhitespace": true,
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+
+        "editor.trimAutoWhitespace": true,
+
+        "[markdown]": {
+          "editor.trimAutoWhitespace": false
+        },
+
+        "[jupyter]": {
+          "editor.trimAutoWhitespace": false
+        }
       }
 
 - name: Write VS Code settings.json (Flatpak path)
