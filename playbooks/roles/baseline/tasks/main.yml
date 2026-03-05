@@ -1,9 +1,11 @@
 ---
 - name: Install baseline packages
   ansible.builtin.dnf:
-    name: "{{ baseline_base_packages }}"
+    name: "{{ item }}"
     state: present
     update_cache: true
+  loop: "{{ baseline_base_packages }}"
+  failed_when: false
 
 - name: Remove unwanted packages (best effort)
   ansible.builtin.dnf:
