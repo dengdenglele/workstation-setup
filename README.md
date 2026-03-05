@@ -113,7 +113,10 @@ Assumes a particular structure of directories
 
 ### Install OS
 
-Install Fedora
+Install Fedora Workstation
+
+* Workstation includes the GNOME (vanilla) Desktop Environment
+* Get it [here](https://fedoraproject.org/workstation/download/)
 
 Advantages of Fedora:
 
