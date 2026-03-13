@@ -73,24 +73,29 @@ cd workstation-setup
 
 # copy host_vars/localhost.yml.example to host_vars/localhost.yml
 
-ansible-playbook -K playbooks/lab-stack.yml
+cat << EOF > inventory
+[local]
+localhost ansible_connection=local
+EOF
+
+ansible-playbook -i inventory -K playbooks/lab-stack.yml
 
 # upon dnf config-manager: command not found
 sudo dnf -y install dnf-plugins-core
-ansible-playbook -K playbooks/lab-stack.yml
+ansible-playbook -i inventory -K playbooks/lab-stack.yml
 ```
 
 Run only one role:
 
 ```sh
-ansible-playbook -K playbooks/lab-stack.yml --tags baseline
-ansible-playbook -K playbooks/lab-stack.yml --tags ocr
-ansible-playbook -K playbooks/lab-stack.yml --tags virtualbox
-ansible-playbook -K playbooks/lab-stack.yml --tags docker
-ansible-playbook -K playbooks/lab-stack.yml --tags quarto
-ansible-playbook -K playbooks/lab-stack.yml --tags chrome
-ansible-playbook -K playbooks/lab-stack.yml --tags vscode
-ansible-playbook -K playbooks/lab-stack.yml --tags desktop
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags baseline
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags ocr
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags virtualbox
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags docker
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags quarto
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags chrome
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags vscode
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags desktop
 ```
 
 You can also combine tags, e.g. `--tags baseline,docker,vscode`.
@@ -113,7 +118,10 @@ Assumes a particular structure of directories
 
 ### Install OS
 
-Install Fedora
+Install Fedora Workstation
+
+* Workstation includes the GNOME (vanilla) Desktop Environment
+* Get it [here](https://fedoraproject.org/workstation/download/)
 
 Advantages of Fedora:
 
