@@ -66,6 +66,12 @@ Clone workstation-setup repository
 git clone git@github.com:fs-ise/workstation-setup.git
 ```
 
+Enable SSH server on remote host (by default disabled on Fedora Workstation)
+```
+# Run this command manually on the remote host
+sudo systemctl enable --now sshd
+```
+
 Install/update software
 
 ```sh
