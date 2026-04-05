@@ -1,4 +1,8 @@
 ---
+- name: Ensure RPM Fusion repos are available
+  ansible.builtin.include_role:
+    name: repo_rpmfusion
+
 - name: Remove Oracle VirtualBox repo file if present
   ansible.builtin.file:
     path: /etc/yum.repos.d/virtualbox.repo
