@@ -117,5 +117,5 @@
   become: false
   community.general.dconf:
     key: "{{ item.key }}"
-    value: "{{ item.value }}"
+    value: "{{ item.value | string }}" # filter enforces string representation
   loop: "{{ german_us_keyboard_layout }}"
