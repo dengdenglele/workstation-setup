@@ -93,6 +93,6 @@
 - name: Open gnome-terminal with shortcut (as in Ubuntu)
   become: false
   community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/media-keys/{{ item.key }}"
+    key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop: "{{ gnome_terminal_custom_shortcut }}"
