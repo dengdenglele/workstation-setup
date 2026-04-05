@@ -38,12 +38,6 @@
     name: python3-psutil
     state: present
 
-- name: Remove system sounds (optional)
-  ansible.builtin.file:
-    path: /usr/share/sounds
-    state: absent
-  when: desktop_gnome_remove_system_sounds | bool
-
 - name: Install dotfiles aliases
   become: false
   block:
@@ -83,3 +77,10 @@
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop: "{{ gnome_navigation_shortcuts + gnome_terminal_custom_shortcut }}"
+
+- name: Disable alert sound (terminal 'dingding' noise)
+  become : false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_alert_sound }}"

@@ -1,6 +1,4 @@
 ---
-desktop_gnome_remove_system_sounds: true
-
 gnome_navigation_shortcuts:
   - key: "/org/gnome/desktop/wm/keybindings/switch-applications"
     value: "['<Super>Tab']"
@@ -36,3 +34,7 @@ gnome_time_and_calendar_properties:
 
   - key: "/org/gnome/desktop/interface/clock-show-seconds"
     value: true
+
+gnome_alert_sound:
+  - key: "/org/gnome/desktop/sound/event-sounds"
+    value: false
