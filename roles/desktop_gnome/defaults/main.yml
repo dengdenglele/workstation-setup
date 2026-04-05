@@ -2,13 +2,27 @@
 desktop_gnome_remove_system_sounds: true
 
 gnome_navigation_shortcuts:
-  - { key: "/org/gnome/desktop/wm/keybindings/switch-applications", value: "['<Super>Tab']" }
-  - { key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward", value: "['<Shift><Super>Tab']" }
-  - { key: "/org/gnome/desktop/wm/keybindings/switch-windows", value: "['<Alt>Tab']" }
-  - { key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward", value: "['<Shift><Alt>Tab']" }
+  - key: "/org/gnome/desktop/wm/keybindings/switch-applications"
+    value: "['<Super>Tab']"
+
+  - key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward"
+    value: "['<Shift><Super>Tab']"
+
+  - key: "/org/gnome/desktop/wm/keybindings/switch-windows"
+    value: "['<Alt>Tab']"
+
+  - key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward"
+    value: "['<Shift><Alt>Tab']"
 
 gnome_terminal_custom_shortcut:
-  - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings", value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']" }
-  - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'<Control><Alt>t'" }
-  - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'gnome-terminal'" }
-  - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'gnome-terminal'" }
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding"
+    value: "'<Control><Alt>t'"
+
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command"
+    value: "'gnome-terminal'"
+
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
+    value: "'gnome-terminal'"
