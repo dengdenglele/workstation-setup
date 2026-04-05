@@ -60,3 +60,7 @@ gnome_mouse_touchpad:
 gnome_hot_corner:
   - key: "/org/gnome/desktop/interface/enable-hot-corners"
     value: false
+
+german_us_keyboard_layout:
+  - key: "/org/gnome/desktop/input-sources/sources"
+    value: "[('xkb', 'de'), ('xkb', 'us')]"

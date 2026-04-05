@@ -112,3 +112,10 @@
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop: "{{ gnome_hot_corner }}"
+
+- name: Add both DE and US keyboard layout
+  become: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ german_us_keyboard_layout }}"
