@@ -1,8 +1,14 @@
 ---
+- name: Check quarto path
+  ansible.builtin.stat:
+    path: "{{ quarto_install_dir }}"
+  register: path_stat
+
 - name: Remove /opt/quarto if it exists as a directory
   ansible.builtin.file:
     path: "{{ quarto_install_dir }}"
     state: absent
+  when: path_stat.stat.exists and path_stat.stat.isdir
 
 - name: Download Quarto tarball
   ansible.builtin.get_url:
