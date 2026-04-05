@@ -106,3 +106,13 @@
   community.general.dconf:
     key: /org/gnome/desktop/wm/keybindings/switch-windows-backward
     value: ['<Shift><Alt>Tab']
+
+- name: Open gnome-terminal with shortcut (as in Ubuntu)
+  become: false
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: "binding", value: "'<Control><Alt>t'"}
+    - { key: "command", value: "'gnome-terminal'"}
+    - { key: "name", value: "'gnome-terminal'"}
