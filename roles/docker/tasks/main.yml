@@ -35,6 +35,7 @@
     append: true
 
 - name: Pull docker images
-  ansible.builtin.command: "docker pull {{ item }}"
+  community.docker.docker_image_pull:
+    name: "{{ item }}"
+    platform: amd64
   loop: "{{ docker_images }}"
-  changed_when: false
