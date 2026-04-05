@@ -69,19 +69,13 @@
         mode: "0644"
         state: present
 
-- name: Set GTK clock format to 24h
+- name: Set GNOME time and calendar properties
   become: false
   become_user: "{{ target_user }}"
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface clock-format '24h'
-  changed_when: false
-  failed_when: false
-
-- name: Show week date in GNOME calendar
-  become: false
-  become_user: "{{ target_user }}"
-  ansible.builtin.command: gsettings set org.gnome.desktop.calendar show-weekdate true
-  changed_when: false
-  failed_when: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_time_and_calendar_properties }}"
 
 - name: Add Ubuntu-like shortcuts
   become: false

@@ -26,3 +26,13 @@ gnome_terminal_custom_shortcut:
 
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
     value: "'gnome-terminal'"
+
+gnome_time_and_calendar_properties:
+  - key: "/org/gnome/desktop/calendar/show-weekdate"
+    value: true
+
+  - key: "/org/gnome/desktop/interface/clock-format"
+    value: "'24h'"
+
+  - key: "/org/gnome/desktop/interface/clock-show-seconds"
+    value: true
