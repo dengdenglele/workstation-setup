@@ -110,9 +110,10 @@
 - name: Open gnome-terminal with shortcut (as in Ubuntu)
   become: false
   community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/{{ item.key }}"
+    key: "/org/gnome/settings-daemon/plugins/media-keys/{{ item.key }}"
     value: "{{ item.value }}"
   loop:
-    - { key: "binding", value: "'<Control><Alt>t'"}
-    - { key: "command", value: "'gnome-terminal'"}
-    - { key: "name", value: "'gnome-terminal'"}
+    - { key: "custom-keybindings", value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']" }
+    - { key: "custom-keybindings/custom0/binding", value: "'<Control><Alt>t'" }
+    - { key: "custom-keybindings/custom0/command", value: "'gnome-terminal'" }
+    - { key: "custom-keybindings/custom0/name", value: "'gnome-terminal'" }
