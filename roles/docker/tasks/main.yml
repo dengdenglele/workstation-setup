@@ -34,7 +34,7 @@
     groups: docker
     append: true
 
-- name: Pull docker images
+- name: Pull docker images (this might take a while...)
   community.docker.docker_image_pull:
     name: "{{ item }}"
     platform: amd64

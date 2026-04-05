@@ -81,7 +81,6 @@ baseline_install_packages_best_effort:
   - rubygem-bundler
   - texlive-lang-german
   - texlive-latex-extra
-  - texlive-scheme-full
   - texlive-xetex
   - texstudio
   - unifont-fonts
