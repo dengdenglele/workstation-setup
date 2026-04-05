@@ -12,17 +12,17 @@
   register: remove_result
 
 - block:
-  - name: Download Quarto tarball
-    ansible.builtin.get_url:
-      url: "{{ quarto_url }}"
-      dest: "/tmp/{{ quarto_tarball }}"
-      mode: "0644"
+    - name: Download Quarto tarball
+      ansible.builtin.get_url:
+        url: "{{ quarto_url }}"
+        dest: "/tmp/{{ quarto_tarball }}"
+        mode: "0644"
 
-  - name: Unpack Quarto tarball to {{ quarto_install_dir }}-{{ quarto_version }}
-    ansible.builtin.unarchive:
-      src: "/tmp/{{ quarto_tarball }}"
-      dest: /opt
-      remote_src: true
+    - name: Unpack Quarto tarball to {{ quarto_install_dir }}-{{ quarto_version }}
+      ansible.builtin.unarchive:
+        src: "/tmp/{{ quarto_tarball }}"
+        dest: /opt
+        remote_src: true
   when: not path_stat.stat.exists or remove_result.changed
 
 - name: Symlink {{ quarto_install_dir }} -> {{ quarto_install_dir }}-{{ quarto_version }}
