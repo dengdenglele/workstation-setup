@@ -46,3 +46,13 @@ gnome_battery_percentage:
 gnome_dark_theme:
   - key: "/org/gnome/desktop/interface/color-scheme"
     value: "'prefer-dark'"
+
+gnome_mouse_touchpad:
+  - key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "'flat'"
+  
+  - key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
+    value: true
+
+  - key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+    value: false
