@@ -38,3 +38,7 @@ gnome_time_and_calendar_properties:
 gnome_alert_sound:
   - key: "/org/gnome/desktop/sound/event-sounds"
     value: false
+
+gnome_battery_percentage:
+  - key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: true
