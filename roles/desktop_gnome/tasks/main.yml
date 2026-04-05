@@ -83,16 +83,9 @@
   changed_when: false
   failed_when: false
 
-- name: Enable Switch applications & windows shortcut (as in Ubuntu)
+- name: Add Ubuntu-like shortcuts
   become: false
   community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
-  loop: "{{ gnome_navigation_shortcuts }}"
-
-- name: Open gnome-terminal with shortcut (as in Ubuntu)
-  become: false
-  community.general.dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-  loop: "{{ gnome_terminal_custom_shortcut }}"
+  loop: "{{ gnome_navigation_shortcuts + gnome_terminal_custom_shortcut }}"
