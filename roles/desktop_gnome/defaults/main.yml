@@ -56,3 +56,7 @@ gnome_mouse_touchpad:
 
   - key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
     value: false
+
+gnome_hot_corner:
+  - key: "/org/gnome/desktop/interface/enable-hot-corners"
+    value: false

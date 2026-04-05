@@ -105,3 +105,10 @@
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop: "{{ gnome_mouse_touchpad }}"
+
+- name: Disable GNOME hot corner (top-left)
+  become: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_hot_corner }}"
