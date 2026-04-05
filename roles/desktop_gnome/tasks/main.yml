@@ -82,3 +82,27 @@
   ansible.builtin.command: gsettings set org.gnome.desktop.calendar show-weekdate true
   changed_when: false
   failed_when: false
+
+- name: Switch applications shortcut (as in Ubuntu)
+  become: false
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-applications
+    value: ['<Super>Tab']
+
+- name: Switch applications backward shortcut (as in Ubuntu)
+  become: false
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-applications-backward
+    value: ['<Shift><Super>Tab']
+
+- name: Switch windows shortcut (as in Ubuntu)
+  become: false
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-windows
+    value: ['<Alt>Tab']
+
+- name: Switch windows backward shortcut (as in Ubuntu)
+  become: false
+  community.general.dconf:
+    key: /org/gnome/desktop/wm/keybindings/switch-windows-backward
+    value: ['<Shift><Alt>Tab']
