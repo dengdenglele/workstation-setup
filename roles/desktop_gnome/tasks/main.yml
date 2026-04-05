@@ -88,19 +88,11 @@
   community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
-  loop:
-    - { key: /org/gnome/desktop/wm/keybindings/switch-applications, value: ['<Super>Tab'] }
-    - { key: /org/gnome/desktop/wm/keybindings/switch-applications-backward, value: ['<Shift><Super>Tab'] }
-    - { key: /org/gnome/desktop/wm/keybindings/switch-windows, value: ['<Alt>Tab'] }
-    - { key: /org/gnome/desktop/wm/keybindings/switch-windows-backward, value: ['<Shift><Alt>Tab'] }
+  loop: "{{ gnome_navigation_shortcuts }}"
 
 - name: Open gnome-terminal with shortcut (as in Ubuntu)
   become: false
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/media-keys/{{ item.key }}"
     value: "{{ item.value }}"
-  loop:
-    - { key: "custom-keybindings", value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']" }
-    - { key: "custom-keybindings/custom0/binding", value: "'<Control><Alt>t'" }
-    - { key: "custom-keybindings/custom0/command", value: "'gnome-terminal'" }
-    - { key: "custom-keybindings/custom0/name", value: "'gnome-terminal'" }
+  loop: "{{ gnome_terminal_custom_shortcut }}"
