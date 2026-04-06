@@ -81,7 +81,7 @@ cd workstation-setup
 
 cat << EOF > inventory
 [local]
-localhost ansible_connection=local
+localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 EOF
 
 ansible-playbook -i inventory -K playbooks/lab-stack.yml

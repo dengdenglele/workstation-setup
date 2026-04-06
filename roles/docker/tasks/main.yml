@@ -10,6 +10,14 @@
   args:
     creates: /etc/yum.repos.d/docker-ce.repo
 
+- name: Install Python deps for Ansible (requests + packaging + docker)
+  ansible.builtin.dnf:
+    name:
+      - python3-requests
+      - python3-packaging
+      - python3-docker
+    state: present
+
 - name: Install Docker Engine packages
   ansible.builtin.dnf:
     name: "{{ docker_packages }}"
