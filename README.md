@@ -44,8 +44,6 @@ flowchart LR
 
 ```
 
-## workstation-setup
-
 Install ansible and clone the repository
 
 ```sh
@@ -110,7 +108,7 @@ You can also combine tags, e.g. `--tags baseline,docker,vscode`.
 
 ### Update software and configuration
 
-Ansible setup repository (TODO: explain idempotency).
+In this Ansible setup repository.
 
 ### Backup and sync
 
@@ -197,6 +195,11 @@ ls -la
 ```
 
 ### Restore data
+
+- `workstation` and `repos` from HDD
+- `Nextcloud`: through sync
+
+TODO : restoring individual files (link video/explanation?)
 
 ## External data sources
 
