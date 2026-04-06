@@ -198,6 +198,7 @@ ls -la
 
 - `workstation` and `repos` from HDD
 - `Nextcloud`: through sync
+- Directories (e.g., Thunderbird/including extensions)
 
 TODO : restoring individual files (link video/explanation?)
 
