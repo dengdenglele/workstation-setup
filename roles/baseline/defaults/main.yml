@@ -47,6 +47,7 @@ baseline_install_packages_best_effort:
   - borgbackup
   - catdoc
   - clamav
+  - clamav-update
   - dict-gcide
   - dict-wn
   - dictd
