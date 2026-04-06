@@ -25,11 +25,11 @@ gnome_custom_shortcuts:
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding"
     value: "'<Control><Alt>t'"
 
-  # Files (Win+E)
+  # Files/Nemo (Win+E)
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name"
-    value: "'files'"
+    value: "'files-nemo'"
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command"
-    value: "'nautilus'"
+    value: "'nemo'"
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding"
     value: "'<Super>e'"
 
