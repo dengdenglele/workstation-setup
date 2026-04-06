@@ -32,9 +32,6 @@ gnome_time_and_calendar_properties:
   - key: "/org/gnome/desktop/interface/clock-format"
     value: "'24h'"
 
-  - key: "/org/gnome/desktop/interface/clock-show-seconds"
-    value: true
-
 gnome_alert_sound:
   - key: "/org/gnome/desktop/sound/event-sounds"
     value: false
@@ -43,9 +40,6 @@ gnome_battery_percentage:
   - key: "/org/gnome/desktop/interface/show-battery-percentage"
     value: true
 
-gnome_dark_theme:
-  - key: "/org/gnome/desktop/interface/color-scheme"
-    value: "'prefer-dark'"
 
 gnome_mouse_touchpad:
   - key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
@@ -54,8 +48,6 @@ gnome_mouse_touchpad:
   - key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
     value: true
 
-  - key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
-    value: false
 
 gnome_hot_corner:
   - key: "/org/gnome/desktop/interface/enable-hot-corners"

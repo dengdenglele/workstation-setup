@@ -92,13 +92,6 @@
     value: "{{ item.value }}"
   loop: "{{ gnome_battery_percentage }}"
 
-- name: Enable global dark theme
-  become: false
-  community.general.dconf:
-    key: "{{ item.key }}"
-    value: "{{ item.value }}"
-  loop: "{{ gnome_dark_theme }}"
-
 - name: Set mouse and touchpad settings
   become: false
   community.general.dconf:
