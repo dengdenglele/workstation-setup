@@ -16,6 +16,8 @@ baseline_remove_packages_best_effort:
   - cheese
   - deja-dup
   - evolution
+  - evince
+  - gnome-boxes
   - gnome-calendar
   - gnome-characters
   - gnome-connections
@@ -32,6 +34,7 @@ baseline_remove_packages_best_effort:
   - ibus-typing-booster
   - malcontent
   - malcontent-control
+  - mediawriter
   - nautilus-share
   - orca
   - shotwell
@@ -39,6 +42,7 @@ baseline_remove_packages_best_effort:
   - telnet
   - transmission
   - vino
+  - yelp
 
 baseline_install_packages_best_effort:
   - artha
