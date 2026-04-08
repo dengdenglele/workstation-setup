@@ -88,10 +88,12 @@ baseline_install_packages_best_effort:
   - texlive-latex-extra
   - texlive-xetex
   - texstudio
+  - tldr
   - unifont-fonts
   - unrtf
   - untex
   - vim
+  - virt-manager
   - wv
   - xournalpp
   - xsel
