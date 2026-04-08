@@ -12,8 +12,8 @@ gnome_navigation_shortcuts:
   - key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward"
     value: "['<Shift><Alt>Tab']"
 
-
 gnome_custom_shortcuts:
+  # Ensure custom shortcuts are visible in GNOME keyboard shortcuts
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
     value: >
       ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
@@ -50,14 +50,12 @@ gnome_battery_percentage:
   - key: "/org/gnome/desktop/interface/show-battery-percentage"
     value: true
 
-
 gnome_mouse_touchpad:
   - key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
     value: "'flat'"
   
   - key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
     value: true
-
 
 gnome_hot_corner:
   - key: "/org/gnome/desktop/interface/enable-hot-corners"
