@@ -15,7 +15,9 @@ gnome_navigation_shortcuts:
 
 gnome_custom_shortcuts:
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+    value: >
+      ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
 
   # Terminal (Ctrl+Alt+T)
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
