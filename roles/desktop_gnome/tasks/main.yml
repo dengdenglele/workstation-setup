@@ -76,7 +76,7 @@
   community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
-  loop: "{{ gnome_navigation_shortcuts + gnome_terminal_custom_shortcut }}"
+  loop: "{{ gnome_navigation_shortcuts + gnome_custom_shortcuts }}"
 
 - name: Disable alert sound (terminal 'dingding' noise)
   become : false

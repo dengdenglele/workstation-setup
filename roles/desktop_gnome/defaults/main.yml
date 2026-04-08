@@ -33,8 +33,6 @@ gnome_custom_shortcuts:
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding"
     value: "'<Super>e'"
 
-gnome_terminal_custom_shortcut: "{{ gnome_custom_shortcuts }}"
-
 gnome_time_and_calendar_properties:
   - key: "/org/gnome/desktop/calendar/show-weekdate"
     value: true
