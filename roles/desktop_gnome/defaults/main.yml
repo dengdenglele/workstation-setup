@@ -21,9 +21,9 @@ gnome_custom_shortcuts:
 
   # Terminal (Ctrl+Alt+T)
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
-    value: "'gnome-terminal'"
+    value: "'terminal ptyxis'"
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command"
-    value: "'gnome-terminal'"
+    value: "'ptyxis'"
   - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding"
     value: "'<Control><Alt>t'"
 

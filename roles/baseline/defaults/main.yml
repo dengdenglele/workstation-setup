@@ -62,7 +62,6 @@ baseline_install_packages_best_effort:
   - gitk
   - gnome-clocks
   - gnome-commander
-  - gnome-terminal
   - gnupg2
   - hplip
   - hplip-gui
