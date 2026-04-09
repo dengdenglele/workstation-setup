@@ -41,11 +41,17 @@
 - name: Install dotfiles aliases
   become: false
   block:
-    - name: Deploy bash aliases
+    - name: Check if .bash_aliases exists
+      ansible.builtin.stat:
+        path: "{{ target_home }}/.bash_aliases"
+      register: file_stat
+
+    - name: Deploy .bash_aliases if it does not exit
       ansible.builtin.copy:
         src: "{{ role_path }}/files/dotfiles/bash_aliases"
         dest: "{{ target_home }}/.bash_aliases"
         mode: "0644"
+      when: not file_stat.stat.exists
 
     - name: Ensure .bashrc sources aliases
       ansible.builtin.lineinfile:
