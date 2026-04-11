@@ -12,4 +12,4 @@ docker_images:
   - rocker/verse
   - python:3
   - alekzonder/puppeteer
-  - lfoppiano/grobid:0.8.1
+  - grobid/grobid:0.9.0-full

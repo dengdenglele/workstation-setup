@@ -96,13 +96,14 @@ ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags baseline
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags ocr
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags virtualbox
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags docker
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags grobid
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags quarto
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags chrome
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags vscode
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags desktop
 ```
 
-You can also combine tags, e.g. `--tags baseline,docker,vscode`.
+You can also combine tags, e.g. `--tags baseline,docker,grobid,vscode`.
 
 ## Day-to-day
 

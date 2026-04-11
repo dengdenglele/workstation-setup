@@ -1,0 +1,129 @@
+---
+- name: Pull GROBID Docker image
+  ansible.builtin.command: "docker pull {{ grobid_image }}"
+  changed_when: false
+
+- name: Check if GROBID container exists
+  ansible.builtin.command: "docker container inspect {{ grobid_container_name }}"
+  register: grobid_container_inspect
+  failed_when: false
+  changed_when: false
+
+- name: Run GROBID container
+  ansible.builtin.command: >-
+    docker run -d
+    --name {{ grobid_container_name }}
+    --restart unless-stopped
+    -p {{ grobid_port }}:8070
+    {{ grobid_image }}
+  when: grobid_container_inspect.rc != 0
+
+- name: Ensure GROBID container is started
+  ansible.builtin.command: "docker start {{ grobid_container_name }}"
+  when: grobid_container_inspect.rc == 0
+  changed_when: false
+
+- name: Ensure pdf-to-tei script directory exists
+  ansible.builtin.file:
+    path: "{{ grobid_script_path | dirname }}"
+    state: directory
+    mode: "0755"
+
+- name: Install pdf-to-tei helper script
+  ansible.builtin.copy:
+    dest: "{{ grobid_script_path }}"
+    mode: "0755"
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      if [[ "$#" -lt 1 ]]; then
+        echo "Usage: $(basename "$0") file1.pdf [file2.pdf ...]" >&2
+        exit 1
+      fi
+
+      endpoint="http://127.0.0.1:{{ grobid_port }}/api/processFulltextDocument"
+
+      for infile in "$@"; do
+        [[ -f "$infile" ]] || continue
+        outfile="${infile%.[Pp][Dd][Ff]}.tei.xml"
+
+        curl --silent --show-error --fail \
+          --max-time $(({{ grobid_nfs_timeout_ms }} / 1000 + 30)) \
+          -F "input=@${infile}" \
+          "$endpoint" > "$outfile"
+      done
+
+
+- name: Ensure Nautilus scripts directory exists
+  ansible.builtin.file:
+    path: "{{ grobid_nautilus_script_dir }}"
+    state: directory
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: "0755"
+  when: grobid_nautilus_script_install | bool
+
+- name: Install Nautilus script for PDF to TEI conversion
+  ansible.builtin.copy:
+    dest: "{{ grobid_nautilus_script_dir }}/Convert PDF to TEI"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: "0755"
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+      "{{ grobid_script_path }}" "$@"
+  when: grobid_nautilus_script_install | bool
+
+- name: Ensure Nautilus file-manager actions dir exists
+  ansible.builtin.file:
+    path: "{{ target_home }}/.local/share/file-manager/actions"
+    state: directory
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: "0755"
+  when: grobid_nautilus_action_install | bool
+
+- name: Install Nautilus right-click action
+  ansible.builtin.copy:
+    dest: "{{ target_home }}/.local/share/file-manager/actions/grobid-pdf-to-tei.desktop"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: "0644"
+    content: |
+      [Desktop Entry]
+      Type=Action
+      Name={{ grobid_nautilus_action_name }}
+      Icon=text-x-script
+      Profiles=profile-zero;
+
+      [X-Action-Profile profile-zero]
+      MimeTypes=application/pdf;
+      Exec={{ grobid_script_path }} "%F"
+  when: grobid_nautilus_action_install | bool
+
+- name: Ensure Nemo actions dir exists
+  ansible.builtin.file:
+    path: "{{ target_home }}/.local/share/nemo/actions"
+    state: directory
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: "0755"
+  when: grobid_nemo_action_install | bool
+
+- name: Install Nemo right-click action
+  ansible.builtin.copy:
+    dest: "{{ target_home }}/.local/share/nemo/actions/grobid-pdf-to-tei.nemo_action"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: "0644"
+    content: |
+      [Nemo Action]
+      Name={{ grobid_nemo_action_name }}
+      Comment=Convert selected PDFs to TEI XML via GROBID
+      Exec={{ grobid_script_path }} %F
+      Icon-Name=text-x-script
+      Selection=any
+      Extensions=pdf;
+  when: grobid_nemo_action_install | bool
