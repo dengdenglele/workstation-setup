@@ -97,6 +97,7 @@ ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags ocr
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags virtualbox
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags docker
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags grobid
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags languagetool
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags quarto
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags chrome
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags vscode
@@ -193,6 +194,23 @@ EOF
 
 quarto render test.qmd
 ls -la
+```
+
+Languagetool test
+
+```shell
+curl -d "text=This are bad sentence.&language=en-US" http://localhost:8081/v2/check
+```
+
+Chrome: Advanced settings (only for professional users) - LanguageTool server: Local server
+
+Test: should return no match for `fs-ise`:
+
+```shell
+curl -s -X POST "http://127.0.0.1:8081/v2/check" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  --data "text=This is fs-ise and it should not be flagged.&language=en-US" \
+  | jq '.matches'
 ```
 
 ### Restore data

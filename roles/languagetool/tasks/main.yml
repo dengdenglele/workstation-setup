@@ -1,0 +1,69 @@
+---
+- name: Install Docker Engine packages
+  ansible.builtin.dnf:
+    name: "{{ languagetool_docker_packages }}"
+    state: present
+    update_cache: true
+
+- name: Install Python Docker SDK dependency for Ansible modules
+  ansible.builtin.dnf:
+    name: "{{ languagetool_python_packages }}"
+    state: present
+
+- name: Enable and start Docker service
+  ansible.builtin.systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Create LanguageTool data directory
+  ansible.builtin.file:
+    path: "{{ languagetool_data_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create build directory
+  ansible.builtin.file:
+    path: "{{ languagetool_data_dir }}/build"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Download custom dictionary
+  ansible.builtin.get_url:
+    url: "{{ languagetool_dict_url }}"
+    dest: "{{ languagetool_data_dir }}/build/spelling.txt"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Create Dockerfile for custom LanguageTool image
+  ansible.builtin.copy:
+    dest: "{{ languagetool_data_dir }}/build/Dockerfile"
+    content: |
+      FROM erikvl87/languagetool
+      USER root
+      COPY spelling.txt /tmp/spelling.txt
+      RUN (echo; cat /tmp/spelling.txt) >> /LanguageTool/org/languagetool/resource/en/hunspell/spelling.txt
+      USER languagetool
+
+- name: Build custom LanguageTool image
+  community.docker.docker_image:
+    name: languagetool-custom
+    source: build
+    build:
+      path: "{{ languagetool_data_dir }}/build"
+    force_source: true
+
+- name: Run LanguageTool container
+  community.docker.docker_container:
+    name: "{{ languagetool_container_name }}"
+    image: languagetool-custom
+    restart_policy: always
+    state: started
+    recreate: true
+    published_ports:
+      - "127.0.0.1:{{ languagetool_port }}:{{ languagetool_container_port }}"
