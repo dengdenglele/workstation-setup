@@ -10,11 +10,20 @@
   args:
     creates: /etc/yum.repos.d/docker-ce.repo
 
+- name: Install Python deps for Ansible (requests + packaging + docker)
+  ansible.builtin.dnf:
+    name:
+      - python3-requests
+      - python3-packaging
+      - python3-docker
+    state: present
+
 - name: Install Docker Engine packages
   ansible.builtin.dnf:
     name: "{{ docker_packages }}"
     state: present
     update_cache: true
+    disable_gpg_check: true
 
 - name: Enable and start Docker service
   ansible.builtin.systemd:
@@ -33,7 +42,8 @@
     groups: docker
     append: true
 
-- name: Pull docker images
-  ansible.builtin.command: "docker pull {{ item }}"
+- name: Pull docker images (this might take a while...)
+  community.docker.docker_image_pull:
+    name: "{{ item }}"
+    platform: amd64
   loop: "{{ docker_images }}"
-  changed_when: false

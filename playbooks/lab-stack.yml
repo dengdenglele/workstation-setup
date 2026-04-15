@@ -20,6 +20,12 @@
     - role: docker
       tags: [docker]
 
+    - role: grobid
+      tags: [grobid]
+
+    - role: languagetool
+      tags: [languagetool]
+
     - role: quarto
       tags: [quarto]
 

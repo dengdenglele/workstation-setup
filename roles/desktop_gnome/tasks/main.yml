@@ -1,17 +1,9 @@
 ---
-- name: Enable RPM Fusion free repository
-  ansible.builtin.dnf:
-    name:
-      - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts.distribution_major_version }}.noarch.rpm"
-    state: present
+- name: Ensure RPM Fusion repos are available
+  ansible.builtin.include_role:
+    name: repo_rpmfusion
 
-- name: Enable RPM Fusion nonfree repository
-  ansible.builtin.dnf:
-    name:
-      - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts.distribution_major_version }}.noarch.rpm"
-    state: present
-
-- name: Install Dropbox and Nautilus extension
+- name: Install Dropbox and Nautilus extension (RPMFusion)
   ansible.builtin.dnf:
     name:
       - dropbox
@@ -46,20 +38,20 @@
     name: python3-psutil
     state: present
 
-- name: Remove system sounds (optional)
-  ansible.builtin.file:
-    path: /usr/share/sounds
-    state: absent
-  when: desktop_gnome_remove_system_sounds | bool
-
 - name: Install dotfiles aliases
   become: false
   block:
-    - name: Deploy bash aliases
+    - name: Check if .bash_aliases exists
+      ansible.builtin.stat:
+        path: "{{ target_home }}/.bash_aliases"
+      register: file_stat
+
+    - name: Deploy .bash_aliases if it does not exit
       ansible.builtin.copy:
         src: "{{ role_path }}/files/dotfiles/bash_aliases"
         dest: "{{ target_home }}/.bash_aliases"
         mode: "0644"
+      when: not file_stat.stat.exists
 
     - name: Ensure .bashrc sources aliases
       ansible.builtin.lineinfile:
@@ -77,16 +69,52 @@
         mode: "0644"
         state: present
 
-- name: Set GTK clock format to 24h
+- name: Set GNOME time and calendar properties
   become: false
   become_user: "{{ target_user }}"
-  ansible.builtin.command: gsettings set org.gnome.desktop.interface clock-format '24h'
-  changed_when: false
-  failed_when: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_time_and_calendar_properties }}"
 
-- name: Show week date in GNOME calendar
+- name: Add Ubuntu-like shortcuts
   become: false
-  become_user: "{{ target_user }}"
-  ansible.builtin.command: gsettings set org.gnome.desktop.calendar show-weekdate true
-  changed_when: false
-  failed_when: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_navigation_shortcuts + gnome_custom_shortcuts }}"
+
+- name: Disable alert sound (terminal 'dingding' noise)
+  become : false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_alert_sound }}"
+
+- name: Enable battery percentage in top bar
+  become: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_battery_percentage }}"
+
+- name: Set mouse and touchpad settings
+  become: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_mouse_touchpad }}"
+
+- name: Disable GNOME hot corner (top-left)
+  become: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ gnome_hot_corner }}"
+
+- name: Add both DE and US keyboard layout
+  become: false
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value | string }}" # filter enforces string representation
+  loop: "{{ german_us_keyboard_layout }}"

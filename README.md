@@ -44,8 +44,6 @@ flowchart LR
 
 ```
 
-## workstation-setup
-
 Install ansible and clone the repository
 
 ```sh
@@ -66,6 +64,12 @@ Clone workstation-setup repository
 git clone git@github.com:fs-ise/workstation-setup.git
 ```
 
+Enable SSH server on remote host (by default disabled on Fedora Workstation)
+```
+# Run this command manually on the remote host
+sudo systemctl enable --now sshd
+```
+
 Install/update software
 
 ```sh
@@ -75,7 +79,7 @@ cd workstation-setup
 
 cat << EOF > inventory
 [local]
-localhost ansible_connection=local
+localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 EOF
 
 ansible-playbook -i inventory -K playbooks/lab-stack.yml
@@ -92,19 +96,21 @@ ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags baseline
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags ocr
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags virtualbox
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags docker
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags grobid
+ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags languagetool
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags quarto
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags chrome
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags vscode
 ansible-playbook -i inventory -K playbooks/lab-stack.yml --tags desktop
 ```
 
-You can also combine tags, e.g. `--tags baseline,docker,vscode`.
+You can also combine tags, e.g. `--tags baseline,docker,grobid,vscode`.
 
 ## Day-to-day
 
 ### Update software and configuration
 
-Ansible setup repository (TODO: explain idempotency).
+In this Ansible setup repository.
 
 ### Backup and sync
 
@@ -190,7 +196,30 @@ quarto render test.qmd
 ls -la
 ```
 
+Languagetool test
+
+```shell
+curl -d "text=This are bad sentence.&language=en-US" http://localhost:8081/v2/check
+```
+
+Chrome: Advanced settings (only for professional users) - LanguageTool server: Local server
+
+Test: should return no match for `fs-ise`:
+
+```shell
+curl -s -X POST "http://127.0.0.1:8081/v2/check" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  --data "text=This is fs-ise and it should not be flagged.&language=en-US" \
+  | jq '.matches'
+```
+
 ### Restore data
+
+- `workstation` and `repos` from HDD
+- `Nextcloud`: through sync
+- Directories (e.g., Thunderbird/including extensions)
+
+TODO : restoring individual files (link video/explanation?)
 
 ## External data sources
 

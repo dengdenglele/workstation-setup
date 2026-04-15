@@ -16,6 +16,8 @@ baseline_remove_packages_best_effort:
   - cheese
   - deja-dup
   - evolution
+  - evince
+  - gnome-boxes
   - gnome-calendar
   - gnome-characters
   - gnome-connections
@@ -32,6 +34,7 @@ baseline_remove_packages_best_effort:
   - ibus-typing-booster
   - malcontent
   - malcontent-control
+  - mediawriter
   - nautilus-share
   - orca
   - shotwell
@@ -39,6 +42,7 @@ baseline_remove_packages_best_effort:
   - telnet
   - transmission
   - vino
+  - yelp
 
 baseline_install_packages_best_effort:
   - artha
@@ -47,6 +51,7 @@ baseline_install_packages_best_effort:
   - borgbackup
   - catdoc
   - clamav
+  - clamav-update
   - dict-gcide
   - dict-wn
   - dictd
@@ -57,7 +62,6 @@ baseline_install_packages_best_effort:
   - gitk
   - gnome-clocks
   - gnome-commander
-  - gnome-terminal
   - gnupg2
   - hplip
   - hplip-gui
@@ -81,13 +85,14 @@ baseline_install_packages_best_effort:
   - rubygem-bundler
   - texlive-lang-german
   - texlive-latex-extra
-  - texlive-scheme-full
   - texlive-xetex
   - texstudio
+  - tldr
   - unifont-fonts
   - unrtf
   - untex
   - vim
+  - virt-manager
   - wv
   - xournalpp
   - xsel

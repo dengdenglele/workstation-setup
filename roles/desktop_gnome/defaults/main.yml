@@ -1,2 +1,66 @@
 ---
-desktop_gnome_remove_system_sounds: true
+gnome_navigation_shortcuts:
+  - key: "/org/gnome/desktop/wm/keybindings/switch-applications"
+    value: "['<Super>Tab']"
+
+  - key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward"
+    value: "['<Shift><Super>Tab']"
+
+  - key: "/org/gnome/desktop/wm/keybindings/switch-windows"
+    value: "['<Alt>Tab']"
+
+  - key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward"
+    value: "['<Shift><Alt>Tab']"
+
+gnome_custom_shortcuts:
+  # Ensure custom shortcuts are visible in GNOME keyboard shortcuts
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: >
+      ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+
+  # Terminal (Ctrl+Alt+T)
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name"
+    value: "'terminal ptyxis'"
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command"
+    value: "'ptyxis'"
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding"
+    value: "'<Control><Alt>t'"
+
+  # Files/Nemo (Win+E)
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name"
+    value: "'files-nemo'"
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command"
+    value: "'nemo'"
+  - key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding"
+    value: "'<Super>e'"
+
+gnome_time_and_calendar_properties:
+  - key: "/org/gnome/desktop/calendar/show-weekdate"
+    value: true
+
+  - key: "/org/gnome/desktop/interface/clock-format"
+    value: "'24h'"
+
+gnome_alert_sound:
+  - key: "/org/gnome/desktop/sound/event-sounds"
+    value: false
+
+gnome_battery_percentage:
+  - key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: true
+
+gnome_mouse_touchpad:
+  - key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "'flat'"
+  
+  - key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
+    value: true
+
+gnome_hot_corner:
+  - key: "/org/gnome/desktop/interface/enable-hot-corners"
+    value: false
+
+german_us_keyboard_layout:
+  - key: "/org/gnome/desktop/input-sources/sources"
+    value: "[('xkb', 'de'), ('xkb', 'us')]"
