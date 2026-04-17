@@ -69,6 +69,7 @@ baseline_install_packages_best_effort:
   - libxslt
   - nemo
   - nemo-fileroller
+  - NetworkManager-tui
   - nextcloud-client
   - obs-studio
   - openssh-clients
