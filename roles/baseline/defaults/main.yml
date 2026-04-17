@@ -49,6 +49,7 @@ baseline_install_packages_best_effort:
   - audacity
   - autokey-gtk
   - borgbackup
+  - btop
   - catdoc
   - clamav
   - clamav-update
@@ -65,6 +66,7 @@ baseline_install_packages_best_effort:
   - gnupg2
   - hplip
   - hplip-gui
+  - htop
   - keepassxc
   - libxslt
   - nemo
