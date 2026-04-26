@@ -128,6 +128,7 @@ Install Fedora Workstation
 
 * Workstation includes the GNOME (vanilla) Desktop Environment
 * Get it [here](https://fedoraproject.org/workstation/download/)
+* Tested on Fedora Workstation 43 and 44 (beta)
 
 Advantages of Fedora:
 
