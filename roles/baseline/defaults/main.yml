@@ -57,6 +57,7 @@ baseline_install_packages_best_effort:
   - dict-wn
   - dictd
   - diffpdf
+  - fastfetch
   - flatpak
   - gimp
   - git-lfs
@@ -71,6 +72,7 @@ baseline_install_packages_best_effort:
   - libxslt
   - nemo
   - nemo-fileroller
+  - neovim
   - NetworkManager-tui
   - nextcloud-client
   - obs-studio
